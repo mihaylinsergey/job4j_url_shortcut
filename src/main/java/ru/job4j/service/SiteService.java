@@ -3,6 +3,7 @@ package ru.job4j.service;
 import lombok.AllArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -25,7 +26,7 @@ public class SiteService implements UserDetailsService {
         Optional<Site> rsl = Optional.empty();
         try {
             rsl = Optional.of(userRepository.save(user));
-        } catch (Exception e) {
+        } catch (DataIntegrityViolationException e) {
             LOG.error("Error!", e);
         }
         return rsl;
@@ -34,7 +35,7 @@ public class SiteService implements UserDetailsService {
     public Optional<Site> findBySite(String site) {
         Optional<Site> rsl = Optional.empty();
         try {
-            rsl = Optional.ofNullable(userRepository.findBySite(site));
+            rsl = userRepository.findBySite(site);
         } catch (Exception e) {
             LOG.error("Error!", e);
         }

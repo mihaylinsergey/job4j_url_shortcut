@@ -19,6 +19,7 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 
 
@@ -87,8 +88,8 @@ public class SiteController {
                     .build();
         }
         Address address = optionalAddress.get();
-        int total = address.getTotal();
-        address.setTotal(++total);
+        AtomicInteger total = new AtomicInteger(address.getTotal());
+        address.setTotal(total.incrementAndGet());
         addressService.update(address);
         return ResponseEntity
                 .status(HttpStatus.FOUND)
