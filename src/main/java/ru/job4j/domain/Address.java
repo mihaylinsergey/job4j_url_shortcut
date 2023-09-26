@@ -7,7 +7,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
-@Entity
+@Entity(name = "address")
 @Table(name = "address")
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Data

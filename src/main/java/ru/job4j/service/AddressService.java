@@ -56,4 +56,8 @@ public class AddressService {
         return addressRepository.findAll();
     }
 
+    public void increaseTotal(String code) {
+        addressRepository.increaseTotal(code);
+    }
+
 }

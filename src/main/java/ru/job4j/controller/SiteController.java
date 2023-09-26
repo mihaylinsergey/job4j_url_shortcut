@@ -88,9 +88,8 @@ public class SiteController {
                     .build();
         }
         Address address = optionalAddress.get();
-        AtomicInteger total = new AtomicInteger(address.getTotal());
-        address.setTotal(total.incrementAndGet());
         addressService.update(address);
+        addressService.increaseTotal(code);
         return ResponseEntity
                 .status(HttpStatus.FOUND)
                 .header("URL", optionalAddress.get().getUrl())
